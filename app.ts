@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import { config } from "dotenv";
 import connectDB from "./src/core/db/connect";
+import mongoose from "mongoose";
 
 config();
 
@@ -17,4 +18,11 @@ app.listen(port, () => console.log(`listening on port ${port}`));
 
 app.get("/", (req: Request, res: Response) => {
     res.send("TypeScript Express App");
+});
+
+process.on('SIGINT', () => {
+    mongoose.connection.close().then(() => {
+        console.log('[💤] Mongoose connection disconnected through app termination');
+        process.exit(0);
+    });
 });
