@@ -1,4 +1,4 @@
-import { BrandedProductModel, ContractModel, DiscountModel, MedicinalProductModel, PackSizeModel, PatientModel, ProductPriceModel } from "../core/db/models/models";
+import { PatientModel, DiscountModel, PackSizeModel, ProductPriceModel, MedicinalProductModel, BrandedProductModel, ContractModel } from "../core/db/models/models";
 
 export const createTestData = async () => {
     console.log("[📝] Creating test data...");
@@ -206,7 +206,8 @@ export const clearTestData = async () => {
 export const testDataCheck = async () => {
     console.log("[🔎] Checking for test data...");
 
-    const testContract = await ContractModel.findOne({ name: "Test Contract" });
+    // check if any contracts exist
+    const testContract = await ContractModel.findOne();
 
     if (testContract) {
         console.log("[✅] Test data already exists.");
