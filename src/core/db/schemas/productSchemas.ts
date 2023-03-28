@@ -9,10 +9,7 @@ export const BrandedProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    products: {
-        type: Array,
-        required: true,
-    },
+    products: [{ type: mongoose.Schema.Types.ObjectId, ref: "MedicinalProduct" }]
 });
 
 export const MedicinalProductSchema = new mongoose.Schema({
@@ -20,10 +17,8 @@ export const MedicinalProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    prices: {
-        type: Array,
-        required: true,
-    },
+    prices: [{ type: mongoose.Schema.Types.ObjectId, ref: "ProductPrice" }],
+
 });
 
 export const ProductPriceSchema = new mongoose.Schema({
@@ -31,13 +26,14 @@ export const ProductPriceSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    packSize: {
-        type: Object,
-        required: true,
-    },
+    packSize: { type: mongoose.Schema.Types.ObjectId, ref: "PackSize" }
 });
 
 export const PackSizeSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
     size: {
         type: Number,
         required: true,

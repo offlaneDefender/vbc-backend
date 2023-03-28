@@ -1,21 +1,18 @@
 import mongoose from "mongoose";
 
 export const ContractSchema = new mongoose.Schema({
-    patient: {
-        type: Object,
-        required: true,
-    },
+    patient: { type: mongoose.Schema.Types.ObjectId, ref: "Patient" },
     product: {
-        type: Object,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "MedicinalProduct",
     },
     packSize: {
-        type: Object,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PackSize",
     },
     discount: {
-        type: Object,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Discount",
     },
     totalValue: {
         type: Number,
@@ -27,6 +24,6 @@ export const ContractSchema = new mongoose.Schema({
     },
     notes: {
         type: String,
-        required: true,
+        required: false,
     },
 });

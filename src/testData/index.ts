@@ -22,7 +22,7 @@ export const createTestData = async () => {
 
     const testDiscount = new DiscountModel({
         name: "Test Discount",
-        percentage: 0.1,
+        value: 0.1,
     });
 
     try {
@@ -37,7 +37,7 @@ export const createTestData = async () => {
 
     const testPackSize = new PackSizeModel({
         name: "Test Pack Size",
-        quantity: 10,
+        size: 10,
     });
 
     try {
@@ -119,4 +119,101 @@ export const createTestData = async () => {
     }
 
     console.log("[✅] Test data created successfully.");
+}
+
+export const clearTestData = async () => {
+    console.log("[🗑️] Clearing test data...");
+
+    try {
+        await ContractModel.deleteMany();
+        console.log("[✅] Deleted test Contracts.")
+    }
+    catch (error) {
+        console.error(
+            `[❌] Error deleting test Contracts: ${error}`
+        );
+    }
+
+
+    try {
+        await BrandedProductModel.deleteMany();
+        console.log("[✅] Deleted test Branded Products.")
+    }
+    catch (error) {
+        console.error(
+            `[❌] Error deleting test Branded Products: ${error}`
+        );
+    }
+
+
+    try {
+        await MedicinalProductModel.deleteMany();
+        console.log("[✅] Deleted test Medicinal Products.")
+    }
+    catch (error) {
+        console.error(
+            `[❌] Error deleting test Medicinal Products: ${error}`
+        );
+    }
+
+
+    try {
+        await ProductPriceModel.deleteMany();
+        console.log("[✅] Deleted test Prices.")
+    }
+    catch (error) {
+        console.error(
+            `[❌] Error deleting test Prices: ${error}`
+        );
+    }
+
+
+    try {
+        await PackSizeModel.deleteMany();
+        console.log("[✅] Deleted test Pack Sizes.")
+    }
+    catch (error) {
+        console.error(
+            `[❌] Error deleting test Pack Sizes: ${error}`
+        );
+    }
+
+
+    try {
+        await DiscountModel.deleteMany();
+        console.log("[✅] Deleted test Discounts.")
+    }
+    catch (error) {
+        console.error(
+            `[❌] Error deleting test Discounts: ${error}`
+        );
+    }
+
+
+    try {
+        await PatientModel.deleteMany();
+        console.log("[✅] Deleted test Patients.")
+    }
+    catch (error) {
+        console.error(
+            `[❌] Error deleting test Patients: ${error}`
+        );
+    }
+
+    console.log("[✅] Test data cleared successfully.");
+}
+
+export const testDataCheck = async () => {
+    console.log("[🔎] Checking for test data...");
+
+    const testContract = await ContractModel.findOne({ name: "Test Contract" });
+
+    if (testContract) {
+        console.log("[✅] Test data already exists.");
+        return true;
+    }
+    else {
+        console.log("[❌] Test data does not exist.");
+        return false;
+    }
 }

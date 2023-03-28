@@ -19,6 +19,7 @@ export interface ProductPrice{
 
 export interface PackSize{
     _id: string;
+    name: string;
     size: number;
 }
 
