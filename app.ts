@@ -7,8 +7,9 @@ config();
 
 const url = process.env.DB_URL || "";
 const completeUrl = url.replace("<password>", process.env.DB_PASSWORD || "")
+const dbName = process.env.DB_NAME || "";
 
-connectDB(completeUrl);
+connectDB(completeUrl, dbName);
 
 const app: Express = express();
 
