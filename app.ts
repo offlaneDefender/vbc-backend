@@ -3,6 +3,10 @@ import { config } from "dotenv";
 import connectDB from "./src/core/db/connect";
 import mongoose from "mongoose";
 import patientRoutes from './src/patients/routes';
+import packSizeRoutes from './src/packSizes/routes';
+import contractRoutes from './src/contracts/routes';
+import discountRoutes from './src/discounts/routes';
+import productRoutes from './src/products/routes';
 
 config();
 
@@ -32,6 +36,14 @@ app.get("/", (_: Request, res: Response) => {
 });
 
 app.use('/patients', patientRoutes);
+
+app.use('/products', productRoutes);
+
+app.use('/packSizes', packSizeRoutes);
+
+app.use('/contracts', contractRoutes);
+
+app.use('/discounts', discountRoutes);
 
 // graceful shutdown
 process.on('SIGINT', () => {
