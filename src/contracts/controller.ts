@@ -4,7 +4,12 @@ import { ContractModel } from "../core/db/models/models";
 
 const contractsController = {
     getContracts: async (_: Request, res: Response) => {
-        const contracts = await ContractModel.find();
+        const contracts = await ContractModel.find().populate([
+            "patient",
+            "product",
+            "packSize",
+            "discount",
+        ]);
         res.json(contracts);
     },
     getContract: async (req: Request, res: Response) => {

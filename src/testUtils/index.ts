@@ -99,7 +99,7 @@ export const createTestData = async () => {
 
     const testContract = new ContractModel({
         name: "Test Contract",
-        products: [testBrandedProduct._id],
+        product: testMedicinalProduct._id,
         discount: testDiscount._id,
         patient: testPatient._id,
         notes: '',
