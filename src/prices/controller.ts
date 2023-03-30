@@ -1,5 +1,6 @@
 import { ProductPriceModel } from "../core/db/models/models";
 import { Request, Response } from "express";
+import { Types } from "mongoose";
 
 const controller = {
     async getPrices(_: Request, res: Response) {
@@ -11,7 +12,10 @@ const controller = {
         res.json(price);
     },
     async createPrice(req: Request, res: Response) {
-        const price = await ProductPriceModel.create(req.body);
+        const price = await ProductPriceModel.create({
+            ...req.body,
+            _id: new Types.ObjectId()
+        });
         res.json(price);
     },
     async updatePrice(req: Request, res: Response) {

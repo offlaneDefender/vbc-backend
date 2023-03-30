@@ -1,5 +1,6 @@
 import { MedicinalProductModel } from "../../core/db/models/models";
 import { Request, Response } from "express";
+import { Types } from "mongoose";
 
 const controller = {
     async getMedicinalProducts(_: Request, res: Response) {
@@ -11,7 +12,10 @@ const controller = {
         res.json(medicinalProduct);
     },
     async createMedicinalProduct(req: Request, res: Response) {
-        const medicinalProduct = await MedicinalProductModel.create(req.body);
+        const medicinalProduct = await MedicinalProductModel.create({
+            ...req.body,
+            _id: new Types.ObjectId()
+        });
         res.json(medicinalProduct);
     },
     async updateMedicinalProduct(req: Request, res: Response) {

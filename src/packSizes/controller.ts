@@ -1,5 +1,6 @@
 import { PackSizeModel } from "../core/db/models/models";
 import { Request, Response } from "express";
+import { Types } from "mongoose";
 
 const controller = {
     async getPackSizes(_: Request, res: Response) {
@@ -11,7 +12,10 @@ const controller = {
         res.json(packSize);
     },
     async createPackSize(req: Request, res: Response) {
-        const packSize = await PackSizeModel.create(req.body);
+        const packSize = await PackSizeModel.create({
+            ...req.body,
+            _id: new Types.ObjectId()
+        });
         res.json(packSize);
     },
     async updatePackSize(req: Request, res: Response) {

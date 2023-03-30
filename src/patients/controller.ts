@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { Types } from 'mongoose'
 import { PatientModel } from '../core/db/models/models';
 
 const patientsController = {
@@ -11,7 +12,10 @@ const patientsController = {
         res.json(patient);
     },
     createPatient: async (req: Request, res: Response) => {
-        const patient = await PatientModel.create(req.body);
+        const patient = await PatientModel.create({
+            ...req.body,
+            _id: new Types.ObjectId()
+        });
         res.json(patient);
     },
     updatePatient: async (req: Request, res: Response) => {

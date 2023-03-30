@@ -1,5 +1,6 @@
 import { BrandedProductModel } from "../../core/db/models/models";
 import { Request, Response } from "express";
+import { Types } from "mongoose";
 
 const controller = {
     async getBrandedProducts(_: Request, res: Response) {
@@ -11,7 +12,10 @@ const controller = {
         res.json(brandedProduct);
     },
     async createBrandedProduct(req: Request, res: Response) {
-        const brandedProduct = await BrandedProductModel.create(req.body);
+        const brandedProduct = await BrandedProductModel.create({
+            ...req.body,
+            _id: new Types.ObjectId()
+        });
         res.json(brandedProduct);
     },
     async updateBrandedProduct(req: Request, res: Response) {

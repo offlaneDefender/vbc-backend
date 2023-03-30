@@ -8,6 +8,7 @@ import contractRoutes from './src/contracts/routes';
 import discountRoutes from './src/discounts/routes';
 import productRoutes from './src/products/routes';
 import productPrices from './src/prices/routes';
+import cors from 'cors';
 
 config();
 
@@ -22,6 +23,11 @@ const app: Express = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+if (process.env.CORS) {
+    app.use(cors())
+}
 
 //error handling
 app.use((err: Error, _: Request, res: Response, __: Function) => {

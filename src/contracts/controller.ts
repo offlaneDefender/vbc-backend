@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Types } from "mongoose";
 import { ContractModel } from "../core/db/models/models";
 
 const contractsController = {
@@ -11,7 +12,10 @@ const contractsController = {
         res.json(contract);
     },
     createContract: async (req: Request, res: Response) => {
-        const contract = await ContractModel.create(req.body);
+        const contract = await ContractModel.create({
+            ...req.body,
+            _id: new Types.ObjectId()
+        });
         res.json(contract);
     },
     updateContract: async (req: Request, res: Response) => {

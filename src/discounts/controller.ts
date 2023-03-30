@@ -1,5 +1,6 @@
 import { DiscountModel } from "../core/db/models/models";
 import { Request, Response } from "express";
+import { Types } from "mongoose";
 
 const discountsController = {
     getDiscounts: async (_: Request, res: Response) => {
@@ -11,7 +12,10 @@ const discountsController = {
         res.json(discount);
     },
     createDiscount: async (req: Request, res: Response) => {
-        const discount = await DiscountModel.create(req.body);
+        const discount = await DiscountModel.create({
+            ...req.body,
+            _id: new Types.ObjectId()
+        });
         res.json(discount);
     },
     updateDiscount: async (req: Request, res: Response) => {
