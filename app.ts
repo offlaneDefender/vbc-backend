@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import { config } from "dotenv";
 import connectDB from "./src/core/db/connect";
 import mongoose from "mongoose";
+import patientRoutes from './src/patients/routes';
 
 config();
 
@@ -15,12 +16,24 @@ const app: Express = express();
 
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
+
+//error handling
+app.use((err: Error, _: Request, res: Response, __: Function) => {
+    console.error("[❌] Error: ", err.message);
+    res.status(500).send('Something broke!');
+});
+
 app.listen(port, () => console.log(`listening on port ${port}`));
 
-app.get("/", (req: Request, res: Response) => {
+
+app.get("/", (_: Request, res: Response) => {
     res.send("TypeScript Express App");
 });
 
+app.use('/patients', patientRoutes);
+
+// graceful shutdown
 process.on('SIGINT', () => {
     mongoose.connection.close().then(() => {
         console.log('[💤] Mongoose connection disconnected through app termination');
