@@ -7,6 +7,7 @@ import packSizeRoutes from './src/packSizes/routes';
 import contractRoutes from './src/contracts/routes';
 import discountRoutes from './src/discounts/routes';
 import productRoutes from './src/products/routes';
+import productPrices from './src/prices/routes';
 
 config();
 
@@ -44,6 +45,8 @@ app.use('/packSizes', packSizeRoutes);
 app.use('/contracts', contractRoutes);
 
 app.use('/discounts', discountRoutes);
+
+app.use('/prices', productPrices);
 
 // graceful shutdown
 process.on('SIGINT', () => {
