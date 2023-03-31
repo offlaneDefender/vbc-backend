@@ -4,7 +4,7 @@ import { PatientModel } from '../core/db/models/models';
 
 const patientsController = {
     getPatients: async (_: Request, res: Response) => {
-        const patients = await PatientModel.find();
+        const patients = await PatientModel.find().populate("discount");
         res.json(patients);
     },
     getPatient: async (req: Request, res: Response) => {

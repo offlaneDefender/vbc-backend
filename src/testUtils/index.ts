@@ -3,23 +3,6 @@ import { PatientModel, DiscountModel, PackSizeModel, ProductPriceModel, Medicina
 export const createTestData = async () => {
     console.log("[📝] Creating test data...");
 
-    const testPatient = new PatientModel({
-        name: "Test Patient",
-        age: 30,
-        stage: 1,
-        pfs: 0,
-        os: 0,
-    });
-
-    try {
-        await testPatient.save();
-        console.log("[✅] Created 1 test Patient.")
-    } catch (error) {
-        console.error(
-            `[❌] Error creating test Patient: ${error}`
-        );
-    }
-
     const testDiscount = new DiscountModel({
         name: "Test Discount",
         value: 0.1,
@@ -34,6 +17,25 @@ export const createTestData = async () => {
             `[❌] Error creating test Discount: ${error}`
         );
     }
+
+    const testPatient = new PatientModel({
+        name: "Test Patient",
+        age: 30,
+        stage: 1,
+        pfs: 0,
+        os: 0,
+        discount: testDiscount._id,
+    });
+
+    try {
+        await testPatient.save();
+        console.log("[✅] Created 1 test Patient.")
+    } catch (error) {
+        console.error(
+            `[❌] Error creating test Patient: ${error}`
+        );
+    }
+
 
     const testPackSize = new PackSizeModel({
         name: "Test Pack Size",
