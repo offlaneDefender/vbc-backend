@@ -4,7 +4,7 @@ import { Types } from "mongoose";
 
 const controller = {
     async getMedicinalProducts(_: Request, res: Response) {
-        const medicinalProducts = await MedicinalProductModel.find();
+        const medicinalProducts = await MedicinalProductModel.find().populate("prices");
         res.json(medicinalProducts);
     },
     async getMedicinalProduct(req: Request, res: Response) {
